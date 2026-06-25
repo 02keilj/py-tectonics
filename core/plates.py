@@ -2,6 +2,7 @@ import numpy as np
 from numpy import clip
 from scipy.spatial import Voronoi
 from shapely.geometry import Polygon
+from random import choice
 
 def generate_plates(width, height, num_plates, seed=None):
     rng = np.random.default_rng(seed)
@@ -60,4 +61,20 @@ def clip_plates(vor, width, height):
         else:
             regions.append(clipped)
     return regions
+
+def assign_plate_properties(points, seed):
+    plates_list = []
+    rng = np.random.default_rng(seed)
+    
+    plate_types = ['oceanic', 'continental']
+
+    for p in points:
+        point = {
+            'type': rng.choice(plate_types),
+            'drift': (rng.random(2) * 2) - 1, 
+            'elevation': rng.random()
+        }
+        plates_list.append(point)
+    return plates_list
+
 

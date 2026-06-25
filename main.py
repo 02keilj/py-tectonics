@@ -1,6 +1,7 @@
 from config import WIDTH, HEIGHT, NUM_PLATES, SEED
-from core.plates import generate_plates
+from core.plates import generate_plates, assign_plate_properties
 from render.diagram import render_voronoi
 
-points, vor, plates = generate_plates(WIDTH, HEIGHT, NUM_PLATES, SEED)
-render_voronoi(points, vor, WIDTH, HEIGHT, plates)
+points, vor, clipped = generate_plates(WIDTH, HEIGHT, NUM_PLATES, SEED)
+plate_properties = assign_plate_properties(points, SEED)
+render_voronoi(points, vor, WIDTH, HEIGHT, clipped, plate_properties)
